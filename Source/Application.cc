@@ -1,4 +1,4 @@
-#include "Application.hpp"
+#include "../Header/Application.hpp"
 #include <SDL2/SDL.h>
 
 Application* Application::application = nullptr;

@@ -1,6 +1,6 @@
 c:
 	clear
-	g++ -lSDL2 *.cc
+	g++ Source/*.cc main.cc -lSDL2 
 r:
 	clear
 	./a.out

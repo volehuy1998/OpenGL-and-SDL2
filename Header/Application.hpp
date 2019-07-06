@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <exception>
+#include "Window.hpp"
 
 class application_exception : public std::runtime_error
 {
@@ -13,6 +14,8 @@ struct Application
 {
 	static Application* application;
 	static Application* Intance();
+
+	Window* window;
 
 	bool active;
 

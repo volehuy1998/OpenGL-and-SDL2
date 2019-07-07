@@ -1,5 +1,6 @@
 #include "../Header/Application.hpp"
 #include <SDL2/SDL.h>
+#include <GL/gl.h>
 
 Application* Application::application = nullptr;
 Application* Application::Intance()
@@ -35,9 +36,9 @@ Application::Application()
 		std::cout << "Window error: ";
 		std::cout << exception.what() << std::endl;
 	}
-	catch (renderer_exception& exception)
+	catch (glContext_exception& exception)
 	{
-		std::cout << "Renderer error: ";
+		std::cout << "glContext error: ";
 		std::cout << exception.what() << std::endl;
 	}
 }
@@ -54,9 +55,7 @@ bool Application::Run()
 				break;
 		}
 	}
-	SDL_SetRenderDrawColor(window->renderer, 0x0, 0xff, 0x0, 0xff);
-	SDL_RenderClear(window->renderer);
-	SDL_RenderPresent(window->renderer);
+	window->Update();
 	return active;
 }
 

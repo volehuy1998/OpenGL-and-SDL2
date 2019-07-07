@@ -1,4 +1,5 @@
 #include "../Header/Window.hpp"
+#include <GL/gl.h>
 
 
 Window::Window(const std::string& title, int width, int height)
@@ -17,11 +18,18 @@ Window::Window(const std::string& title, int width, int height)
 
 void Window::InitRenderer()
 {
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_FLAG); 
-	if (renderer == nullptr)
+	glContext = SDL_GL_CreateContext(window); 
+	if (glContext == nullptr)
 	{
-		throw renderer_exception(SDL_GetError());
+		throw glContext_exception(SDL_GetError());
 	}
+}
+
+void Window::Update()
+{
+	glClearColor(0, 1, 0, 1);
+	glClear(GL_COLOR_BUFFER_BIT);
+	SDL_GL_SwapWindow(window);
 }
 
 Window::Window(const std::string& title, int x, int y, int width, int height)
@@ -39,6 +47,6 @@ Window::Window(const std::string& title, int x, int y, int width, int height)
 
 Window::~Window()
 {
-	SDL_DestroyRenderer(renderer);
+	SDL_GL_DeleteContext(glContext);
 	SDL_DestroyWindow(window);
 }
